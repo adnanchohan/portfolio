@@ -432,7 +432,7 @@ a {
     gap: 40px;
 }
 
-/* PLAY STORE CARD */
+/* STANDARD PLAY STORE CARD */
 .playstore-card {
     background-color: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -639,6 +639,128 @@ a {
 }
 
 /* -------------------------------------------------------------------------- */
+/* NEWS TICKER HEADER BAR FOR CARDS                                           */
+/* -------------------------------------------------------------------------- */
+.playstore-card-with-ticker {
+    display: flex;
+    flex-direction: column;
+    padding: 0 !important;
+    overflow: hidden;
+}
+
+.playstore-card-body {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 36px;
+    padding: 36px;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.news-ticker-bar {
+    width: 100%;
+    background-color: #FFF7ED;
+    border-bottom: 1px solid #FED7AA;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    overflow: hidden;
+}
+
+.ticker-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    color: #C2410C;
+    background: #FFEDD5;
+    border: 1px solid rgba(194, 65, 12, 0.3);
+    padding: 5px 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.ticker-dot {
+    width: 7px;
+    height: 7px;
+    background-color: #DC2626;
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulse-red 1.5s infinite;
+}
+
+@keyframes pulse-red {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.3; transform: scale(1.2); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.ticker-content-wrapper {
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    width: 100%;
+    mask-image: linear-gradient(to right, transparent, black 20px, black 95%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 20px, black 95%, transparent);
+}
+
+.ticker-text {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    color: #9A3412;
+    animation: ticker-scroll 30s linear infinite;
+    padding-right: 40px;
+}
+
+.news-ticker-bar:hover .ticker-text {
+    animation-play-state: paused;
+}
+
+@keyframes ticker-scroll {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* NEW RELEASE TICKER VARIANT (GREEN THEME) */
+.new-release-ticker {
+    background-color: #F0FDF4;
+    border-bottom: 1px solid #BBF7D0;
+}
+
+.new-badge {
+    color: #15803D;
+    background: #DCFCE7;
+    border: 1px solid rgba(22, 101, 52, 0.25);
+}
+
+.green-dot {
+    background-color: #16A34A;
+    animation: pulse-green 1.5s infinite;
+}
+
+@keyframes pulse-green {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.3; transform: scale(1.2); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.green-ticker-text {
+    color: #166534;
+}
+
+/* -------------------------------------------------------------------------- */
 /* TECHNICAL SKILLS                                                           */
 /* -------------------------------------------------------------------------- */
 .skills-section {
@@ -776,7 +898,7 @@ a {
         font-size: 44px;
     }
 
-    .playstore-card {
+    .playstore-card, .playstore-card-body {
         grid-template-columns: 1fr;
         padding: 24px;
         gap: 24px;
