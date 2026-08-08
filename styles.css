@@ -761,7 +761,7 @@ a {
 }
 
 /* -------------------------------------------------------------------------- */
-/* TECHNICAL SKILLS                                                           */
+/* TECHNICAL SKILLS — REDESIGNED                                              */
 /* -------------------------------------------------------------------------- */
 .skills-section {
     padding: 80px 0;
@@ -771,45 +771,239 @@ a {
 }
 
 .skills-header {
-    margin-bottom: 48px;
-    text-align: center;
-}
-
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-}
-
-.skill-card {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 28px;
-    transition: border-color 0.2s ease, transform 0.2s ease;
-}
-
-.skill-card:hover {
-    border-color: var(--accent-orange);
-    transform: translateY(-2px);
-}
-
-.skill-icon {
-    font-size: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
     margin-bottom: 16px;
 }
 
-.skill-name {
-    font-family: var(--font-sans);
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 10px;
+.skills-header-left {}
+
+.skills-header-right {}
+
+.skills-count {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
 }
 
-.skill-desc {
+.skills-divider {
+    width: 100%;
+    height: 1px;
+    background-color: var(--text-main);
+    margin-bottom: 48px;
+}
+
+/* Skill Category Block */
+.skill-category {
+    margin-bottom: 40px;
+}
+
+.skill-category:last-child {
+    margin-bottom: 0;
+}
+
+.category-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.category-icon-wrapper {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 10px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-orange);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.category-title {
+    font-family: var(--font-sans);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-main);
+    line-height: 1.2;
+    margin-bottom: 2px;
+}
+
+.category-subtitle {
     font-size: 14px;
     color: var(--text-muted);
-    line-height: 1.6;
+    line-height: 1.5;
+}
+
+/* Tech Pills */
+.tech-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tech-pill {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-main);
+    cursor: default;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.tech-pill:hover {
+    border-color: var(--accent-orange);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(194, 65, 12, 0.1);
+}
+
+/* Pill Color Dots */
+.pill-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.pill-dot-kotlin { background-color: #7F52FF; }
+.pill-dot-java { background-color: #ED8B00; }
+.pill-dot-csharp { background-color: #68217A; }
+.pill-dot-cpp { background-color: #00599C; }
+.pill-dot-python { background-color: #3776AB; }
+.pill-dot-sql { background-color: #4479A1; }
+.pill-dot-shell { background-color: #4EAA25; }
+.pill-dot-compose { background-color: #4285F4; }
+.pill-dot-android { background-color: #3DDC84; }
+.pill-dot-arch { background-color: #C2410C; }
+.pill-dot-room { background-color: #FF6F00; }
+.pill-dot-coroutines { background-color: #7F52FF; }
+.pill-dot-jetpack { background-color: #4285F4; }
+.pill-dot-kmp { background-color: #7F52FF; }
+.pill-dot-api { background-color: #10B981; }
+.pill-dot-retrofit { background-color: #48B983; }
+.pill-dot-node { background-color: #539E43; }
+.pill-dot-express { background-color: #444444; }
+.pill-dot-location { background-color: #EA4335; }
+.pill-dot-firebase { background-color: #FFCA28; }
+.pill-dot-offline { background-color: #6366F1; }
+.pill-dot-json { background-color: #A8A29E; }
+.pill-dot-analytics { background-color: #F57C00; }
+.pill-dot-crash { background-color: #D32F2F; }
+.pill-dot-iap { background-color: #01875F; }
+.pill-dot-admob { background-color: #EA4335; }
+.pill-dot-ai { background-color: #8B5CF6; }
+.pill-dot-git { background-color: #F05032; }
+.pill-dot-github { background-color: #24292E; }
+.pill-dot-gitlab { background-color: #FC6D26; }
+.pill-dot-playstore { background-color: #01875F; }
+.pill-dot-gradle { background-color: #02303A; }
+.pill-dot-studio { background-color: #3DDC84; }
+.pill-dot-vs { background-color: #5C2D91; }
+
+/* Tooltip on Hover */
+.tech-pill::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%) translateY(6px);
+    width: 300px;
+    padding: 14px 16px;
+    background-color: var(--text-main);
+    color: var(--bg-canvas);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.55;
+    border-radius: 10px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    z-index: 50;
+    white-space: normal;
+}
+
+.tech-pill::before {
+    content: '';
+    position: absolute;
+    bottom: calc(100% + 4px);
+    left: 50%;
+    transform: translateX(-50%) translateY(6px);
+    border: 6px solid transparent;
+    border-top-color: var(--text-main);
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    z-index: 51;
+}
+
+.tech-pill:hover::after,
+.tech-pill:hover::before {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Learner badge */
+.pill-badge {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #DBEAFE, #E0E7FF);
+    color: #3B52CC;
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid rgba(59, 82, 204, 0.2);
+}
+
+.pill-learner {
+    border-style: dashed;
+}
+
+/* Responsive for Skills */
+@media (max-width: 900px) {
+    .skills-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .tech-pill::after {
+        width: 240px;
+        left: 0;
+        transform: translateX(0) translateY(6px);
+    }
+
+    .tech-pill::before {
+        left: 20px;
+        transform: translateX(0) translateY(6px);
+    }
+
+    .tech-pill:hover::after {
+        transform: translateX(0) translateY(0);
+    }
+
+    .tech-pill:hover::before {
+        transform: translateX(0) translateY(0);
+    }
 }
 
 /* -------------------------------------------------------------------------- */
@@ -904,10 +1098,7 @@ a {
         gap: 24px;
     }
 
-    .skills-grid {
-        grid-template-columns: 1fr;
-    }
-    
+
     .stats-grid {
         flex-direction: column;
         gap: 20px;
