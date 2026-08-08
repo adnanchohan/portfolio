@@ -1048,6 +1048,7 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 48px;
     padding-bottom: 48px;
     border-bottom: 1px solid var(--border-color);
 }
@@ -1065,8 +1066,18 @@ a {
 }
 
 .footer-cta {
-    display: flex;
-    gap: 16px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(100%, 580px);
+    gap: 12px;
+}
+
+.footer-cta a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-height: 44px;
 }
 
 .btn-primary {
@@ -1098,6 +1109,18 @@ a {
 
 .btn-secondary:hover {
     border-color: var(--text-main);
+}
+
+.platform-icon {
+    width: 17px;
+    height: 17px;
+    flex: 0 0 17px;
+}
+
+.play-store-icon {
+    display: inline-block;
+    background: conic-gradient(from 90deg at 28% 50%, #34A853 0 25%, #FBBC04 0 50%, #EA4335 0 75%, #4285F4 0);
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
 }
 
 .footer-bottom {
@@ -1345,11 +1368,10 @@ a {
 
     .footer-cta {
         width: 100%;
-        flex-wrap: wrap;
+        grid-template-columns: 1fr;
     }
 
     .footer-cta a {
-        flex: 1 1 220px;
         text-align: center;
     }
 
