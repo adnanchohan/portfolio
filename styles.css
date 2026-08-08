@@ -938,10 +938,14 @@ a {
 .pill-dot-git { background-color: #F05032; }
 .pill-dot-github { background-color: #24292E; }
 .pill-dot-gitlab { background-color: #FC6D26; }
+.pill-dot-sourcetree { background-color: #0052CC; }
 .pill-dot-playstore { background-color: #01875F; }
 .pill-dot-gradle { background-color: #02303A; }
 .pill-dot-studio { background-color: #3DDC84; }
 .pill-dot-vs { background-color: #5C2D91; }
+.pill-dot-vscode { background-color: #007ACC; }
+.pill-dot-pycharm { background-color: #21D789; }
+.pill-dot-unity { background-color: #222C37; }
 
 /* Tooltip on Hover */
 .tech-pill::after {
@@ -1112,15 +1116,19 @@ a {
 }
 
 .platform-icon {
-    width: 17px;
-    height: 17px;
+    display: block;
+    width: 17px !important;
+    height: 17px !important;
+    max-width: 17px;
+    max-height: 17px;
     flex: 0 0 17px;
 }
 
 .play-store-icon {
-    display: inline-block;
     background: conic-gradient(from 90deg at 28% 50%, #34A853 0 25%, #FBBC04 0 50%, #EA4335 0 75%, #4285F4 0);
     clip-path: polygon(0 0, 100% 50%, 0 100%);
+    color: transparent;
+    font-size: 0;
 }
 
 .footer-bottom {
