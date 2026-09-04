@@ -1,3 +1,16 @@
+// --------------------------------------------------------------------------
+// Google Analytics 4 (GA4) Event Helper
+// --------------------------------------------------------------------------
+function trackAnalyticsEvent(eventName, params = {}) {
+    try {
+        if (typeof window.gtag === 'function') {
+            window.gtag('event', eventName, params);
+        }
+    } catch (err) {
+        console.debug('GA4 tracking skipped:', err);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // --------------------------------------------------------------------------
@@ -21,6 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const nextBtn = carousel.querySelector('.next-btn');
 
         if (!track) return;
+
+        const appCard = carousel.closest('.playstore-card');
+        const appName = appCard ? (appCard.querySelector('.playstore-app-name')?.innerText.trim() || 'App') : 'App';
 
         let autoSlideInterval = null;
         const slideStep = 220; // Scroll distance per step
@@ -64,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
             nextBtn.addEventListener('click', () => {
                 stopAutoSlide();
                 slideNext();
+                trackAnalyticsEvent('carousel_nav_click', { direction: 'next', app_name: appName });
                 setTimeout(startAutoSlide, 5000); // Resume auto-flipping after manual interaction
             });
         }
@@ -72,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
             prevBtn.addEventListener('click', () => {
                 stopAutoSlide();
                 slidePrev();
+                trackAnalyticsEvent('carousel_nav_click', { direction: 'prev', app_name: appName });
                 setTimeout(startAutoSlide, 5000);
             });
         }
@@ -127,6 +145,12 @@ document.addEventListener('DOMContentLoaded', () => {
             lightboxImg.src = img.src;
             lightboxImg.alt = img.alt;
             lightbox.style.display = 'flex';
+
+            // Track screenshot view in GA4
+            trackAnalyticsEvent('view_screenshot', {
+                screenshot_alt: img.alt || 'Screenshot',
+                screenshot_src: img.src
+            });
         });
     });
 
@@ -140,7 +164,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            const targetId = this.getAttribute('href');
+            const target = document.querySelector(targetId);
             if (target) {
                 target.scrollIntoView({
                     behavior: 'smooth',
@@ -150,4 +175,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // --------------------------------------------------------------------------
+    // 5. Global Analytics Click Tracker (Buttons, CTAs, App Links, Socials)
+    // --------------------------------------------------------------------------
+    document.addEventListener('click', (e) => {
+        const target = e.target.closest('[data-analytics]');
+        if (target) {
+            const eventName = target.getAttribute('data-analytics');
+            const label = target.getAttribute('data-label') || target.innerText.trim();
+            const app = target.getAttribute('data-app');
+            const platform = target.getAttribute('data-platform');
+            
+            const params = {
+                event_category: 'engagement',
+                event_label: label,
+            };
+            if (app) params.app_name = app;
+            if (platform) params.platform = platform;
+            if (target.href) params.link_url = target.href;
+
+            trackAnalyticsEvent(eventName, params);
+        }
+    });
+
 });
+
